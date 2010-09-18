@@ -34,11 +34,11 @@ namespace BuildingMonitor.UI
 				SiteUtils.RedirectToAccessDeniedPage();
 				return;
 			}
-			if (!UserCanEditModule(_moduleId))
-			{
-				SiteUtils.RedirectToAccessDeniedPage();
-				return;
-			}
+			//if (!UserCanEditModule(_moduleId))
+			//{
+			//    SiteUtils.RedirectToAccessDeniedPage();
+			//    return;
+			//}
 
 			LoadSettings();
 			PopulateLabels();
@@ -56,7 +56,6 @@ namespace BuildingMonitor.UI
 		{
 			_pageId = WebUtils.ParseInt32FromQueryString("pageid", _pageId);
 			_moduleId = WebUtils.ParseInt32FromQueryString("mid", _moduleId);
-			//_contractorId = WebUtils.ParseInt32FromQueryString("contractorid", _contractorId);
 		}
 
 		private void LoadSettings()
@@ -73,12 +72,6 @@ namespace BuildingMonitor.UI
 
 		private void PopulateLabels()
 		{
-			//this.litHeading.Text = BuildingMonitorResources.Contractor;
-			//this.litSettingsTab.Text = BuildingMonitorResources.Contractor;
-			//this.litSpecialtiesTab.Text = BuildingMonitorResources.Specialties;
-			//this.litStatusTab.Text = BuildingMonitorResources.Status;
-			//this.btnSave.Text = BuildingMonitorResources.LabelSave;
-			//this.btnDelete.Text = BuildingMonitorResources.LabelDelete;
 		}
 
 		private void ComboProyecto()
@@ -87,11 +80,11 @@ namespace BuildingMonitor.UI
 			{
 				using (IDataReader dr = Project.GetAll())
 				{
-					m_cmbProyecto.DataSource = dr;//  m_bd.FillCombo(, "select '', -1 union select Convert(varchar(10), Id) + ' - ' + Nombre,Id from uProyecto", 0, 1);
+					m_cmbProyecto.DataSource = dr;
 					m_cmbProyecto.DataBind();
 				}
 				
-				m_cmbProyecto.Items.Insert(0,new ListItem("","-1"));
+				m_cmbProyecto.Items.Insert(0, new ListItem("", "-1"));
 				m_cmbBloque.Items.Clear();
 				m_cmbObra.Items.Clear();
 			}
@@ -99,17 +92,17 @@ namespace BuildingMonitor.UI
 
 		private void ComboBloque()
 		{
-			if (IsPostBack)
-			{
-				using (IDataReader dr = Block.GetAll(Convert.ToInt32(m_cmbProyecto.SelectedValue)))
-				{
-					m_cmbBloque.DataSource = dr;//  m_bd.FillCombo(, "select '', -1 union select Convert(varchar(10), Id) + ' - ' + Nombre,Id from uProyecto", 0, 1);
-					m_cmbBloque.DataBind();
-				}
+			if (!IsPostBack)
+				return;
 
-				m_cmbBloque.Items.Insert(0, new ListItem("", "-1"));
-				m_cmbObra.Items.Clear();
+			using (IDataReader dr = Block.GetAll(Convert.ToInt32(m_cmbProyecto.SelectedValue)))
+			{
+				m_cmbBloque.DataSource = dr;
+				m_cmbBloque.DataBind();
 			}
+
+			m_cmbBloque.Items.Insert(0, new ListItem("", "-1"));
+			m_cmbObra.Items.Clear();
 		}
 
 		protected void m_cmbProyecto_SelectedIndexChanged(object sender, EventArgs e)
@@ -120,30 +113,36 @@ namespace BuildingMonitor.UI
 
 		private void ComboObra()
 		{
-			if (IsPostBack)
-			{
-				using (IDataReader dr = Work.GetAll(Convert.ToInt32(m_cmbProyecto.SelectedValue), Convert.ToInt32(m_cmbBloque.SelectedValue)))
-				{
-					m_cmbObra.DataSource = dr;//  m_bd.FillCombo(, "select '', -1 union select Convert(varchar(10), Id) + ' - ' + Nombre,Id from uProyecto", 0, 1);
-					m_cmbObra.DataBind();
-				}
+			if (!IsPostBack)
+				return;
 
-				m_cmbObra.Items.Insert(0, new ListItem("", "-1"));
+			int projectId = -1;
+			int blockId = -1;
+
+			int.TryParse(m_cmbProyecto.SelectedValue, out projectId);
+			int.TryParse(m_cmbBloque.SelectedValue, out blockId);
+
+			using (IDataReader dr = Work.GetAll(projectId, blockId))
+			{
+				m_cmbObra.DataSource = dr;
+				m_cmbObra.DataBind();
 			}
+
+			m_cmbObra.Items.Insert(0, new ListItem("", "-1"));
 		}
 
 		private void ComboGrupo()
 		{
-			if (IsPostBack)
+			if (!IsPostBack)
+				return;
+			
+			using (IDataReader dr = ListGroup.GetAll())
 			{
-				using (IDataReader dr = ListGroup.GetAll())
-				{
-					m_cmbGrupo.DataSource = dr;//  m_bd.FillCombo(, "select '', -1 union select Convert(varchar(10), Id) + ' - ' + Nombre,Id from uProyecto", 0, 1);
-					m_cmbGrupo.DataBind();
-				}
-
-				m_cmbGrupo.Items.Insert(0, new ListItem("", "-1"));
+				m_cmbGrupo.DataSource = dr;
+				m_cmbGrupo.DataBind();
 			}
+
+			m_cmbGrupo.Items.Insert(0, new ListItem("", "-1"));
 		}
 
 		protected void m_cmbBloque_SelectedIndexChanged(object sender, EventArgs e)
@@ -195,16 +194,17 @@ namespace BuildingMonitor.UI
 			litAvanceGral.Text = string.Format("Avance General: {0}%<br /><br />", Helpers.Formatter.Decimal(_PromedioGralAvance));
 		}
 		
-		protected string algo(object obj)
+		protected string GetImgFilename(object obj)
 		{
 			decimal dPorcentajeAvance = Convert.ToDecimal(obj);
 
-			if (dPorcentajeAvance < _PromedioGralAvance - 5)//rojo
+			if (dPorcentajeAvance < _PromedioGralAvance - 5)
 			{
 				_totalCount[0]++;
 				return "Rojo.jpg";
 			}
-			if (dPorcentajeAvance < _PromedioGralAvance + 5)//naranja
+
+			if (dPorcentajeAvance < _PromedioGralAvance + 5)
 			{
 				_totalCount[1]++;
 				return "Amarillo.jpg";

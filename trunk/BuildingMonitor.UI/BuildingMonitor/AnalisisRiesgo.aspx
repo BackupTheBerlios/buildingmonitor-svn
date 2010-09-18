@@ -52,7 +52,7 @@
 				<td><%# Eval("Obra") %></td>
 				<td class="bm-number"><%# BuildingMonitor.UI.Helpers.Formatter.Decimal(Eval("PorcentajeAvance")) %> %</td>
 				<td class="bm-number"><%# BuildingMonitor.UI.Helpers.Formatter.Decimal(Eval("PesoEspecifico"))%></td>
-				<td><img src="Img/<%# algo(Eval("PorcentajeAvance"))%>" alt="" /></td>
+				<td><img src="Img/<%# GetImgFilename(Eval("PorcentajeAvance"))%>" alt="" /></td>
 			</tr>
 			</ItemTemplate>
 			</asp:Repeater>
