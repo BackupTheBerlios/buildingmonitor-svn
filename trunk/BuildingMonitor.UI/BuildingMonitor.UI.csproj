@@ -1,0 +1,379 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0199FF1C-C663-4F19-8FD5-B5475A13F067}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BuildingMonitor.UI</RootNamespace>
+    <AssemblyName>BuildingMonitor.UI</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_libs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BuildingMonitorHome.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_GlobalResources\BuildingMonitorResources.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BuildingMonitorResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\BuildingMonitorResources.es.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BuildingMonitorResources.es.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_MasterPages\layout.Master.cs">
+      <DependentUpon>layout.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App_MasterPages\layout.Master.designer.cs">
+      <DependentUpon>layout.Master</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\AnalisisRiesgo.aspx.cs">
+      <DependentUpon>AnalisisRiesgo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\AnalisisRiesgo.aspx.designer.cs">
+      <DependentUpon>AnalisisRiesgo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitorHome.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>BuildingMonitorHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitorHome.aspx.designer.cs">
+      <DependentUpon>BuildingMonitorHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\AdminContract.aspx.cs">
+      <DependentUpon>AdminContract.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\AdminContract.aspx.designer.cs">
+      <DependentUpon>AdminContract.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\AdminContractEdit.aspx.cs">
+      <DependentUpon>AdminContractEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\AdminContractEdit.aspx.designer.cs">
+      <DependentUpon>AdminContractEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\AdminContractor.aspx.cs">
+      <DependentUpon>AdminContractor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\AdminContractor.aspx.designer.cs">
+      <DependentUpon>AdminContractor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\AdminContractorEdit.aspx.cs">
+      <DependentUpon>AdminContractorEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\AdminContractorEdit.aspx.designer.cs">
+      <DependentUpon>AdminContractorEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\AdminDashboard.aspx.cs">
+      <DependentUpon>AdminDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\AdminDashboard.aspx.designer.cs">
+      <DependentUpon>AdminDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\AdminProject.aspx.cs">
+      <DependentUpon>AdminProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\AdminProject.aspx.designer.cs">
+      <DependentUpon>AdminProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\BuildingMonitorModule.ascx.cs">
+      <DependentUpon>BuildingMonitorModule.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\BuildingMonitorModule.ascx.designer.cs">
+      <DependentUpon>BuildingMonitorModule.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\Contracts.aspx.cs">
+      <DependentUpon>Contracts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\Contracts.aspx.designer.cs">
+      <DependentUpon>Contracts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\Controls\DateChooser.ascx.cs">
+      <DependentUpon>DateChooser.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\Controls\DateChooser.ascx.designer.cs">
+      <DependentUpon>DateChooser.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\Controls\NavProjectToItem.ascx.cs">
+      <DependentUpon>NavProjectToItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\Controls\NavProjectToItem.ascx.designer.cs">
+      <DependentUpon>NavProjectToItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\ContractAdd.aspx.cs">
+      <DependentUpon>ContractAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\ContractAdd.aspx.designer.cs">
+      <DependentUpon>ContractAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\AdminProgressRecording.aspx.cs">
+      <DependentUpon>AdminProgressRecording.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\AdminProgressRecording.aspx.designer.cs">
+      <DependentUpon>AdminProgressRecording.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\ContractDetail.aspx.cs">
+      <DependentUpon>ContractDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\ContractDetail.aspx.designer.cs">
+      <DependentUpon>ContractDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\ContractCanceledSuccess.aspx.cs">
+      <DependentUpon>ContractCanceledSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\ContractCanceledSuccess.aspx.designer.cs">
+      <DependentUpon>ContractCanceledSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\ContractAddSuccess.aspx.cs">
+      <DependentUpon>ContractAddSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\ContractAddSuccess.aspx.designer.cs">
+      <DependentUpon>ContractAddSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\PaymentPaidWorkSuccess.aspx.cs">
+      <DependentUpon>PaymentPaidWorkSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\PaymentPaidWorkSuccess.aspx.designer.cs">
+      <DependentUpon>PaymentPaidWorkSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\PaymentPaidWork.aspx.cs">
+      <DependentUpon>PaymentPaidWork.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\PaymentPaidWork.aspx.designer.cs">
+      <DependentUpon>PaymentPaidWork.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\PaymentSuccess.aspx.cs">
+      <DependentUpon>PaymentSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\PaymentSuccess.aspx.designer.cs">
+      <DependentUpon>PaymentSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\Payment.aspx.cs">
+      <DependentUpon>Payment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\Payment.aspx.designer.cs">
+      <DependentUpon>Payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\ProgressRecording.aspx.cs">
+      <DependentUpon>ProgressRecording.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\ProgressRecording.aspx.designer.cs">
+      <DependentUpon>ProgressRecording.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\ProgressRecordingEdit.aspx.cs">
+      <DependentUpon>ProgressRecordingEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\ProgressRecordingEdit.aspx.designer.cs">
+      <DependentUpon>ProgressRecordingEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\BuildingComparer.cs" />
+    <Compile Include="Helpers\Converter.cs" />
+    <Compile Include="Helpers\Formatter.cs" />
+    <Compile Include="Helpers\HierarchicalSerializer.cs" />
+    <Compile Include="Helpers\JQuery.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BuildingMonitor.Business\BuildingMonitor.Business.csproj">
+      <Project>{C9FBD595-B952-45EB-8F52-84D6BD82BB00}</Project>
+      <Name>BuildingMonitor.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mojoPortal.Business.WebHelpers\mojoPortal.Business.WebHelpers.csproj">
+      <Project>{4EAD30EC-4F97-4F38-8530-1B7EDDB8FC8E}</Project>
+      <Name>mojoPortal.Business.WebHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mojoPortal.Business\mojoPortal.Business.csproj">
+      <Project>{8582D51E-126B-4D64-B080-07AD8245B38F}</Project>
+      <Name>mojoPortal.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mojoPortal.Features.UI\mojoPortal.Features.UI.csproj">
+      <Project>{103F2B02-3224-48BC-B173-1F7E1C85178A}</Project>
+      <Name>mojoPortal.Features.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mojoPortal.Net\mojoPortal.Net.csproj">
+      <Project>{30916752-1A97-49CA-95D6-81A5F784EEB5}</Project>
+      <Name>mojoPortal.Net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mojoPortal.Web.Controls\mojoPortal.Web.Controls.csproj">
+      <Project>{A2DCD1E2-A5C3-4E37-A5F2-093659BC1C38}</Project>
+      <Name>mojoPortal.Web.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mojoPortal.Web.Editor\mojoPortal.Web.Editor.csproj">
+      <Project>{4F6DDA2C-C9B8-45B2-AADA-3FF922317661}</Project>
+      <Name>mojoPortal.Web.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mojoPortal.Web.Framework\mojoPortal.Web.Framework.csproj">
+      <Project>{E0D12031-BFDD-4069-9024-8B00A2AA6DBC}</Project>
+      <Name>mojoPortal.Web.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web\mojoPortal.Web.csproj">
+      <Project>{8E511D65-4779-4689-82D4-811D3FE6866E}</Project>
+      <Name>mojoPortal.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\BuildingMonitorResources.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>BuildingMonitorResources.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_MasterPages\layout.Master" />
+    <Content Include="BuildingMonitor\AdminDashboard.aspx" />
+    <Content Include="BuildingMonitor\BuildingMonitorModule.ascx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\BuildingMonitorResources.es.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>BuildingMonitorResources.es.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="BuildingMonitor\AnalisisRiesgo.aspx" />
+    <Content Include="BuildingMonitor\AdminContract.aspx" />
+    <Content Include="BuildingMonitor\AdminContractEdit.aspx" />
+    <Content Include="BuildingMonitor\AdminContractor.aspx" />
+    <Content Include="BuildingMonitor\AdminContractorEdit.aspx" />
+    <Content Include="BuildingMonitor\AdminProject.aspx" />
+    <Content Include="BuildingMonitor\ClientScript\contract-add.js" />
+    <Content Include="BuildingMonitor\ClientScript\library-min.js" />
+    <Content Include="BuildingMonitor\ClientScript\main.js" />
+    <Content Include="BuildingMonitor\Contracts.aspx" />
+    <Content Include="BuildingMonitor\Controls\DateChooser.ascx" />
+    <Content Include="BuildingMonitor\Controls\NavProjectToItem.ascx" />
+    <Content Include="BuildingMonitor\ContractAdd.aspx" />
+    <Content Include="BuildingMonitor\AdminProgressRecording.aspx" />
+    <Content Include="BuildingMonitor\ContractDetail.aspx" />
+    <Content Include="BuildingMonitor\ContractCanceledSuccess.aspx" />
+    <Content Include="BuildingMonitor\ContractAddSuccess.aspx" />
+    <Content Include="BuildingMonitor\Img\Amarillo.jpg" />
+    <Content Include="BuildingMonitor\Img\Rojo.jpg" />
+    <Content Include="BuildingMonitor\Img\Verde.jpg" />
+    <Content Include="BuildingMonitor\PaymentPaidWorkSuccess.aspx" />
+    <Content Include="BuildingMonitor\PaymentPaidWork.aspx" />
+    <Content Include="BuildingMonitor\PaymentSuccess.aspx" />
+    <Content Include="BuildingMonitor\Payment.aspx" />
+    <Content Include="BuildingMonitor\ProgressRecording.aspx" />
+    <Content Include="BuildingMonitor\ProgressRecordingEdit.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Setup\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2711</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /s /y "$(ProjectDir)bin\BuildingMonitor.UI.dll" "$(SolutionDir)Web\bin\"
+xcopy /s /y "$(ProjectDir)bin\BuildingMonitor.Business.dll" "$(SolutionDir)Web\bin\"
+xcopy /s /y "$(ProjectDir)bin\BuildingMonitor.Data.dll" "$(SolutionDir)Web\bin\"
+xcopy /s /y "$(ProjectDir)BuildingMonitor\*.ashx" "$(SolutionDir)Web\BuildingMonitor\"
+xcopy /s /y "$(ProjectDir)BuildingMonitor\*.ascx" "$(SolutionDir)Web\BuildingMonitor\"
+xcopy /s /y "$(ProjectDir)BuildingMonitor\*.aspx" "$(SolutionDir)Web\BuildingMonitor\"
+xcopy /s /y "$(ProjectDir)BuildingMonitor\Controls\*.ascx" "$(SolutionDir)Web\BuildingMonitor\Controls\"
+xcopy /s /y "$(ProjectDir)BuildingMonitor\ClientScript\*.js" "$(SolutionDir)Web\BuildingMonitor\ClientScript\"
+xcopy /s /y "$(ProjectDir)BuildingMonitor\Img\*.*" "$(SolutionDir)Web\BuildingMonitor\Img\"
+xcopy /s /y "$(ProjectDir)App_GlobalResources\*.resx" "$(SolutionDir)Web\App_GlobalResources\"
+xcopy /s /y "$(ProjectDir)Setup\*" "$(SolutionDir)Web\Setup"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

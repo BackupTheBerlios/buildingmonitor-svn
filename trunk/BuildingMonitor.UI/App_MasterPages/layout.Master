@@ -1,0 +1,97 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="~/App_MasterPages/layout.Master.cs" Inherits="WebStore.UI.layout" %>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    <title><portal:PageTitle id="PageTitle1"  runat="server" /></title>
+    <portal:StyleSheet id="StyleSheet"  runat="server" />
+		<portal:MetaContent id="MetaContent" runat="server" />
+		<portal:Favicon id="Favicon1"  runat="server" />
+</head>
+<body>
+<form id="frmMain" runat="server">
+    
+    <asp:SiteMapDataSource ID="SiteMapData" runat="server" ShowStartingNode="false" EnableViewState="false"  />
+		<div id="wrapwebsite">
+			<div id="wrapheader">
+				    <div id="logodesc">
+					    <span class="logobox">
+							    <portal:SiteLogo id="SiteLogo" runat="server"></portal:SiteLogo>
+					    </span>
+					    <div class="sitetitle">
+					        <portal:SiteTitle id="SiteTitle" runat="server"></portal:SiteTitle>
+					        <portal:SkipLink id="SkipLink1" runat="server" />
+					    </div>
+				    </div>
+				    <div class="topnav">
+    				
+				        <portal:WelcomeMessage id="WelcomeMessage" runat="server" UseRightSeparator="False" />&nbsp;
+				        <portal:HomeLink id="HomeLink" runat="server" />
+					    <portal:SearchInput id="SearchInput1" LinkOnly="True" UseLeftSeparator="True" runat="server" />
+					    <portal:UserProfileLink id="UserProfileLink" runat="server" />
+					    <portal:MemberListLink id="MemberListLink" runat="server" UseLeftSeparator="True" />
+					    <portal:RegisterLink id="RegisterLink" runat="server" UseLeftSeparator="True" />
+					    <portal:LoginLink id="LoginLink" runat="server" UseLeftSeparator="True" />
+					    <portal:LogoutLink id="LogoutLink" runat="server" UseLeftSeparator="True" />
+				        &nbsp;
+				        <asp:contentplaceholder ID="pageEditContent" runat="server"></asp:contentplaceholder>
+				    </div>
+			</div>
+			<div id="wrapcentre">
+			    <asp:Panel id="divLeft" runat="server" cssclass="leftside" visible="True">
+			      
+							<portal:SiteMenu id="SiteMenu1" runat="server" CssClass="MainMenu" ZIndex="100"
+							    ShowMenu="true"
+						        ShowTreeView="false"
+						        ShowSKMMenu="true"
+								ClickToOpen="False"
+								HighlightTopMenu="True"
+								SubMenuCssClass=""
+								DefaultMouseUpCssClass=""
+								DefaultMouseOverCssClass="MainMenuMouseOver"
+								DefaultMouseDownCssClass=""
+								OtherItemCssClass="OtherMenuItems"
+								SelectedItemCssClass="SelectedMenuItems"
+								DefaultCssClass=""
+								ItemPadding="2"
+								ItemSpacing="0"
+								MenuFadeDelay="1"
+								Opacity="100"
+								MenuBorderStyle="Solid"
+								BorderWidth="1"
+								BorderColor="#A9B8C2"
+								MenuGridLines="Both"
+								Direction="Vertical">
+							</portal:SiteMenu>
+						
+							<br />
+							<a id="startcontent"></a>
+							<asp:contentplaceholder ID="leftContent" runat="server"></asp:contentplaceholder>
+			    </asp:Panel>
+			    
+			    <asp:Panel id="divCenter" runat="server" visible="True" cssclass="center">
+				    <portal:Breadcrumbs id="Breadcrumbs" runat="server"></portal:Breadcrumbs>
+					<portal:ChildPageMenu id="ChildPageMenu" runat="server" CssClass="Head"></portal:ChildPageMenu>
+					<asp:ContentPlaceHolder ID="mainContent" runat="server"></asp:ContentPlaceHolder>
+						
+				</asp:Panel>
+			    
+			    <asp:Panel id="divRight" runat="server" visible="True" cssclass="rightside">
+					<asp:contentplaceholder ID="rightContent" runat="server"></asp:contentplaceholder>
+				</asp:Panel>
+				
+				
+				
+			</div>
+			
+			<div id="wrapfooter">
+				<portal:SkinPreview id="SkinPreview1" runat="server"></portal:SkinPreview><br /><br />
+				<a href="http://www.mojoportal.com"><img alt="mojoportal" id="logo" src="<%= mojoPortal.Web.Framework.WebUtils.GetSiteRoot()%>/Data/SiteImages/poweredbymojoportal3.gif"  /></a>
+				<a href="http://www.mono-project.com/about/index.html"><img alt="mono" id="img1" src="<%= mojoPortal.Web.Framework.WebUtils.GetSiteRoot()%>/Data/SiteImages/Mono-powered.png" /></a>
+			</div>
+		</div>
+		</form>
+</body>
+</html>
