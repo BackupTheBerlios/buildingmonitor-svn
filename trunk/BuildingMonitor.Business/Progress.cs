@@ -59,7 +59,7 @@ namespace BuildingMonitor.Business
 		}
 
 
-		public static bool Save(int contractId,
+		public static Progress Save(int contractId,
 			int projectId, 
 			int blockId, 
 			int workId, 
@@ -70,7 +70,17 @@ namespace BuildingMonitor.Business
 			int currentProgress,
 			string user)
 		{
-			return DBProgress.Add(contractId, projectId, blockId, workId, groupId, itemId, subItemId, initialProgress, currentProgress, user);
+			Progress progress = new Progress();
+
+			using (IDataReader reader = DBProgress.Add(contractId, projectId, blockId, workId, groupId, itemId, subItemId, initialProgress, currentProgress, user))
+			{
+				if (reader.Read())
+				{
+					progress.Set(Convert.ToInt32(reader["InitialProgress"]), Convert.ToInt32(reader["CurrentProgress"]));
+				}
+			}
+			 
+			return progress;
 		}
 
 		public static bool Save(List<Progress> batchProgress, string user)

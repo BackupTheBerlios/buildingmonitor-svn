@@ -32,8 +32,6 @@ using BuildingMonitor.Business;
 using mojoPortal.Business.WebHelpers;
 using Resources;
 
-
-
 namespace BuildingMonitor.UI
 {
 
@@ -71,7 +69,6 @@ namespace BuildingMonitor.UI
 		private void PopulateLabels()
 		{
 			litHeading.Text = BuildingMonitorResources.ProgressRecAdd;
-			btnSave.Text = BuildingMonitorResources.LabelSave;
 		}
 
 		private void LoadSettings()
@@ -103,77 +100,48 @@ namespace BuildingMonitor.UI
 			ItemId = itemId;
 			SubItemId = subItemId;
 		}
-
-		private void DisplaySavedSuccess()
-		{
-			pnlSavedSuccess.Visible = true;
-			litSavedSuccess.Text = BuildingMonitorResources.ProgressRecSuccessAdd;
-		}
-
-		private bool Save(List<Progress> progresses)
-		{
-			bool isOk = false;
-
-			if (SiteUtils.GetCurrentSiteUser() == null)
-			{
-				SiteUtils.RedirectToLoginPage(this, ResolveUrl("ProgressRecordingEdit.aspx") + string.Format("?pageid={0}&mid={1}", _pageId, _moduleId));
-				return false;
-			}
-				
-			isOk = Progress.Save(progresses, SiteUtils.GetCurrentSiteUser().Name);
-			
-			return isOk;
-		}
 		
 		private void navProjectToItem_SelectChanged(object sender, int projectId, int blockId, int workId, int groupId, int itemId)
 		{
 			bool isValidItem = projectId > 0 && blockId > 0 && workId > 0 && groupId > 0 && itemId > 0;
 
 			UpdateIds(-1, projectId, blockId, workId, groupId, itemId, -1);
-
+			
 			if (isValidItem)
-			{
 				FillContractGrid();
-			}
 
 			pnlContractDetail.Visible = isValidItem;
-			pnlSavedSuccess.Visible = false;
 		}
 
-		private void btnSave_Click(object sender, EventArgs e)
+		private bool SaveProgress()
 		{
-			JavaScriptSerializer serializer = new JavaScriptSerializer();
-			List<Progress> progresses = new List<Progress>();
+			if (Request["SaveProgress"] == null)
+				return false;
+	
+			JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
+			Dictionary<string, int> data = jsSerializer.Deserialize<Dictionary<string, int>>(Request["SaveProgress"]);
+			Progress progress = Progress.Save(data["cId"],
+				data["pId"],
+				data["bId"],
+				data["wId"],
+				data["gId"],
+				data["iId"],
+				data["sId"],
+				data["curr"],
+				data["newp"],
+				SiteUtils.GetCurrentSiteUser().Name);
 
-			foreach(RepeaterItem item in rptContractDetail.Items)
-			{
-				HiddenField hdnData = (HiddenField)item.FindControl("hdnData");
-				Dictionary<string, object> data = (Dictionary<string, object>)serializer.DeserializeObject(hdnData.Value);
+			data["init"] = progress.Initial;
+			data["curr"] = progress.Current;
+			data["newp"] = progress.Current;
 
-				if ((int)data["active"] == 0)
-					continue;
-				if ((int)data["curr"] == (int)data["newp"])
-					continue;
+			Response.Clear();
+			Response.ContentType = "application/json";
+			Response.Flush();
+			Response.Write(jsSerializer.Serialize(data));
+			Response.End();
 
-				Progress progress = new Progress();
-
-				progress.ContractDetail.ContractId = (int)data["cId"];
-				progress.ContractDetail.ProjectId = (int)data["pId"];
-				progress.ContractDetail.BlockId = (int)data["bId"];
-				progress.ContractDetail.WorkId = (int)data["wId"];
-				progress.ContractDetail.GroupId = (int)data["gId"];
-				progress.ContractDetail.ItemId = (int)data["iId"];
-				progress.ContractDetail.SubItemId = (int)data["sId"];
-				progress.Set((int)data["curr"], (int)data["newp"]);
-				
-				progresses.Add(progress);
-			}
-
-			if (!Save(progresses))
-				return;
-
-			DisplaySavedSuccess();
-			FillContractGrid();
+			return true;
 		}
 
 		#region Protected Methods
@@ -195,14 +163,12 @@ namespace BuildingMonitor.UI
 			{
 				if (reader.Read())
 				{
-					data.Add("date", ((DateTime)reader["Date"]).ToString("yyyy-MM-dd"));
 					data.Add("init", reader["InitialProgress"]);
 					data.Add("curr", reader["CurrentProgress"]);
 					data.Add("newp", reader["CurrentProgress"]);
 				}
 				else
 				{
-					data.Add("date", "");
 					data.Add("init", 0);
 					data.Add("curr", 0);
 					data.Add("newp", 0);
@@ -222,9 +188,12 @@ namespace BuildingMonitor.UI
 		{
 			base.OnInit(e);
 
+			if (SaveProgress())
+				return;
+
+			navProjectToItemPath.SetSource(navProjectToItem);
 			Load += new EventHandler(Page_Load);
 			navProjectToItem.SelectChanged += new global::BuildingMonitor.UI.BuildingMonitor.Controls.NavProjectToItem.SelectEventHandler(navProjectToItem_SelectChanged);
-			btnSave.Click += new EventHandler(btnSave_Click);
 		}
 		
 
@@ -239,6 +208,9 @@ namespace BuildingMonitor.UI
 
 			if (!ClientScript.IsClientScriptIncludeRegistered("BuildingMonitor"))
 				ClientScript.RegisterClientScriptInclude(GetType(), "BuildingMonitor", ResolveUrl("ClientScript/main.js"));
+
+			if (!ClientScript.IsClientScriptIncludeRegistered("BuildingMonitorProgressRec"))
+				ClientScript.RegisterClientScriptInclude(GetType(), "BuildingMonitorProgressRec", ResolveUrl("ClientScript/progress-recording.js"));
 		}
 		
 		#endregion

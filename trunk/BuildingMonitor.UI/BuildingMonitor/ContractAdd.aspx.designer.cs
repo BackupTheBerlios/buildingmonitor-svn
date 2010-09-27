@@ -158,24 +158,6 @@ namespace BuildingMonitor.UI {
         protected global::System.Web.UI.WebControls.Literal litTabDetail;
         
         /// <summary>
-        /// lnkRemoveRow control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkRemoveRow;
-        
-        /// <summary>
-        /// tblContractDetail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblContractDetail;
-        
-        /// <summary>
         /// pnlMain control.
         /// </summary>
         /// <remarks>
@@ -201,6 +183,24 @@ namespace BuildingMonitor.UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnDataRef;
+        
+        /// <summary>
+        /// lnkRemoveRow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkRemoveRow;
+        
+        /// <summary>
+        /// tblContractDetail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblContractDetail;
         
         /// <summary>
         /// litTabPaidWork control.

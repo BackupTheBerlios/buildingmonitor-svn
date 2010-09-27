@@ -22,6 +22,8 @@ namespace BuildingMonitor.UI.BuildingMonitor.Controls
 			Item = 4
 		}
 
+		#region Private Fields
+
 		private DropDownList[] _dropDownLists = null;
 		private LinkButton[] _linkButtonsR = null;
 		private NavItem _allowDropDownListFrom = NavItem.Project;
@@ -29,6 +31,15 @@ namespace BuildingMonitor.UI.BuildingMonitor.Controls
 		private NavItem _allowLinkButtonFrom = NavItem.None;
 		private NavItem _allowLinkButtonTo = NavItem.None;
 
+		#endregion
+
+		#region Protected Methods
+
+		/// <summary>
+		/// Handles the Load event of the Page control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (!IsPostBack)
@@ -54,7 +65,10 @@ namespace BuildingMonitor.UI.BuildingMonitor.Controls
 			SetupControls();
 		}
 
-		
+		/// <summary>
+		/// Raises the <see cref="E:System.Web.UI.Control.Init"/> event.
+		/// </summary>
+		/// <param name="e">An <see cref="T:System.EventArgs"/> object that contains the event data.</param>
 		protected override void OnInit(EventArgs e)
 		{
 			base.OnInit(e);
@@ -74,6 +88,9 @@ namespace BuildingMonitor.UI.BuildingMonitor.Controls
 				_linkButtonsR[i].Click += new EventHandler(NavProjectToItem_Click);
 			}
 		}
+		#endregion
+
+		#region Private Methods
 
 		private void NavProjectToItem_Click(object sender, EventArgs e)
 		{
@@ -87,9 +104,6 @@ namespace BuildingMonitor.UI.BuildingMonitor.Controls
 				OnClickLinkItem((NavItem)item);
 			}
 		}
-
-
-		#region Private Methods
 
 		private void InitArrays()
 		{
@@ -256,12 +270,11 @@ namespace BuildingMonitor.UI.BuildingMonitor.Controls
 
 		private void PopulateLabels()
 		{
-			lblProject.Text = BuildingMonitorResources.LabelProject;
-			lblBlock.Text = BuildingMonitorResources.LabelBlock;
-			lblWork.Text = BuildingMonitorResources.LabelWork;
-			lblGroup.Text = BuildingMonitorResources.LabelGroup;
-			lblItem.Text = BuildingMonitorResources.LabelItem;
-			litHeading.Text = BuildingMonitorResources.ContractEditSelectNavigator;
+			litProject.Text = BuildingMonitorResources.LabelProject;
+			litBlock.Text = BuildingMonitorResources.LabelBlock;
+			litWork.Text = BuildingMonitorResources.LabelWork;
+			litGroup.Text = BuildingMonitorResources.LabelGroup;
+			litItem.Text = BuildingMonitorResources.LabelItem;
 		}
 
 		#endregion

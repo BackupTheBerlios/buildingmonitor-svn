@@ -2,6 +2,8 @@
 
 <%@ Register src="Controls/NavProjectToItem.ascx" tagname="NavProjectToItem" tagprefix="uc1" %>
 
+<%@ Register src="Controls/NavProjectToItemPath.ascx" tagname="NavProjectToItemPath" tagprefix="uc2" %>
+
 <asp:Content ContentPlaceHolderID="leftContent" ID="MPLeftPane" runat="server" >
 </asp:Content>
 <asp:Content ContentPlaceHolderID="mainContent" ID="MPContent" runat="server">
@@ -10,81 +12,92 @@
 <asp:Panel id="pnl1" runat="server" CssClass="panelwrapper">
 <div class="modulecontent">	
 	<asp:UpdatePanel ID="pnlMain" runat="server">
-		<ContentTemplate>
-			<div style="float:right;width:69%">
-				<asp:Panel ID="pnlContractDetail" runat="server" Visible="false">
-					<div class="settingrow">
-						<a href="javascript:bmSelectCheckBoxes('tblContractDetail','all')">Seleccionar Todos</a> |
-						<a href="javascript:bmSelectCheckBoxes('tblContractDetail','none')">Seleccionar Ninguno</a> |
-						<a href="javascript:bmProgressRecReset()">Reestablecer Progreso</a>
-					</div>
-					<table id="tblContractDetail" class="bm-table">
-						<asp:Repeater ID="rptContractDetail" runat="server" >
-							<HeaderTemplate>
-								<tr>
-								<th>&nbsp;</th>
-								<th style="width:30%"><%# Resources.BuildingMonitorResources.LabelSubItem %></th>
-								<th style="width:15%"><%# Resources.BuildingMonitorResources.LabelQuantity %></th>
-								<th style="width:51%"><%# Resources.BuildingMonitorResources.ProgressRecFieldCurrent %></th>
-								</tr>
-							</HeaderTemplate>
-							<ItemTemplate>
-								<tr class='<%# Container.ItemIndex % 2 == 0 ? "" : "alternate" %>'>
-								<td class="bm-progress-options">
-									<asp:CheckBox ID="chkSet" runat="server" EnableViewState="false" />
-									<asp:HiddenField ID="hdnData" runat="server" Value='<%# FillRowData((int)Eval("ContractId"), (int)Eval("ProjectId"), (int)Eval("BlockId"), (int)Eval("WorkId"), (int)Eval("GroupId"), (int)Eval("ItemId"), (int)Eval("SubItemId")) %>' EnableViewState="false" />
-								</td>
-								<td><%# Eval("Name") %></td>
-								<td style="text-align:right"><%# BuildingMonitor.UI.Helpers.Formatter.Decimal(Eval("Quantity")) %> <%# Eval("Unit") %></td>
-								<td class="bm-progress">
-									<span class="bm-progress-label"></span>
-									<div class="bm-progress-slider"></div>
-									<span style="clear:both"></span>
-								</td>
-								</tr>
-							</ItemTemplate>
-						</asp:Repeater>
-					</table>
-				</asp:Panel>
-				<br />
-				<asp:Panel ID="pnlSavedSuccess" runat="server" Visible="false" CssClass="ui-widget">
-					<div class="ui-state-highlight ui-corner-all" style="padding:0.2em 1em">
-						<span style="float:left; margin-right: 0.3em;" class="ui-icon ui-icon-check"></span><asp:Literal ID="litSavedSuccess" runat="server" />
-					</div>
-				</asp:Panel>
-			</div>
-			<div style="width:29%;padding:0.5em" class="bm-navigator ui-widget-content ui-corner-all">
-				<uc1:NavProjectToItem ID="navProjectToItem" runat="server" />
-			</div>
+	<ContentTemplate>
+		<div class="bm-navigator ui-widget-content ui-corner-all">
+			<uc1:NavProjectToItem ID="navProjectToItem" runat="server" />
+		</div>
+		<div class="bm-navigator-path">
+			<uc2:NavProjectToItemPath ID="navProjectToItemPath" runat="server" />
+		</div>
+		<br />
+		<div>
+			<asp:Panel ID="pnlContractDetail" runat="server" Visible="false">
+				<div class="settingrow">
+					<a href="javascript:bmSelectCheckBoxes('tblContractDetail','all')">Seleccionar Todos</a> |
+					<a href="javascript:bmSelectCheckBoxes('tblContractDetail','none')">Seleccionar Ninguno</a> |
+					<a href="javascript:bmProgressRecReset()">Reestablecer Progreso</a> |
+					<a href="javascript:bmProgressRecActive(true)">Activar Progreso</a> |
+					<a href="javascript:bmProgressRecActive(false)">Desactivar Progreso</a>
+				</div>
+				<table id="tblContractDetail" class="bm-table">
+					<asp:Repeater ID="rptContractDetail" runat="server" >
+						<HeaderTemplate>
+							<thead>
+							<tr>
+							<th style="width:1%">&nbsp;</th>
+							<th style="width:38%"><%# Resources.BuildingMonitorResources.LabelSubItem %></th>
+							<th style="width:13%"><%# Resources.BuildingMonitorResources.LabelQuantity %></th>
+							<th style="width:45%"><%# Resources.BuildingMonitorResources.ProgressRecFieldCurrent %></th>
+							<th>&nbsp;</th>
+							</tr>
+							</thead>
+						</HeaderTemplate>
+						<SeparatorTemplate><tbody></SeparatorTemplate>
+						<ItemTemplate>
+							<tr class='<%# Container.ItemIndex % 2 == 0 ? "" : "alternate" %>'>
+							<td class="bm-progress-options">
+								<asp:CheckBox ID="chkSet" runat="server" EnableViewState="false" />
+								<asp:HiddenField ID="hdnData" runat="server" Value='<%# FillRowData((int)Eval("ContractId"), (int)Eval("ProjectId"), (int)Eval("BlockId"), (int)Eval("WorkId"), (int)Eval("GroupId"), (int)Eval("ItemId"), (int)Eval("SubItemId")) %>' EnableViewState="false" />
+							</td>
+							<td><%# Eval("Name") %></td>
+							<td class="bm-number"><%# BuildingMonitor.UI.Helpers.Formatter.Decimal(Eval("Quantity")) %> <%# Eval("Unit") %></td>
+							<td class="bm-progress">
+								<span class="bm-progress-status"></span>
+								<span class="bm-progress-label"></span>
+								<div class="bm-progress-slider"></div>
+							</td>
+							<td class="bm-progress-action">
+								<a href="javascript:bmSaveProgress(<%# Container.ItemIndex %>)" class="bm-progress-action-save"><span class='ui-icon ui-icon-disk'></span></a>
+							</td>
+							</tr>
+						</ItemTemplate>
+						<SeparatorTemplate></tbody></SeparatorTemplate>
+					</asp:Repeater>
+				</table>
+			</asp:Panel>
+		</div>
 	</ContentTemplate>
 	</asp:UpdatePanel>
-	<div style="clear:both;margin:0.5em 0">
-		<asp:Button ID="btnSave" runat="server" ValidationGroup="ProgressRecording" Enabled="false" />
-	</div>
+	<div id="dialog_status"></div>
 	<div id="progress-animation" style="display:none;z-index:1000;background:url(../Data/style/img/default/ajax-loader.gif) no-repeat center center">&nbsp;</div>
 	<script type="text/javascript">
-		function bmAllowSaving() {
-			if (jQuery('#<% Response.Write(pnlContractDetail.ClientID); %>').length != 1)
-				jQuery('#<% Response.Write(btnSave.ClientID); %>').attr('disabled', 'disabled');
-			else
-				jQuery('#<% Response.Write(btnSave.ClientID); %>').removeAttr('disabled');
+		function bmAnimation(show) {
+			bmLoadingAnimation('progress-animation', '<% Response.Write(pnlMain.ClientID); %>', show);
 		}
 		function onBeginRequest(sender, args) {
-			bmLoadingAnimation('progress-animation', '<% Response.Write(pnlMain.ClientID); %>', true);
+			bmAnimation(true);
 		}
 		function onEndRequest(sender, args) {
 			jQuery('#<% Response.Write(pnlContractDetail.ClientID); %> td.bm-progress').each(function(i) {
 				bmProgressRecInitSlider(this);
 			});
 
-			bmAllowSaving();
-			bmLoadingAnimation('progress-animation', '<% Response.Write(pnlMain.ClientID); %>', false);
+			bmAnimation(false);
 		}
+		
 		jQuery(document).ready(function() {
 			Sys.WebForms.PageRequestManager.getInstance().add_endRequest(onEndRequest);
-			Sys.WebForms.PageRequestManager.getInstance().add_beginRequest(onBeginRequest)
-			jQuery('#<% Response.Write(pnlContractDetail.ClientID); %> td.bm-progress').each(function(i) {
-				bmProgressRecInitProgressBar(this);
+			Sys.WebForms.PageRequestManager.getInstance().add_beginRequest(onBeginRequest);
+			jQuery('#dialog_status').dialog({
+				autoOpen: false,
+				width: 300,
+				height: 150,
+				modal: true,
+				buttons: {
+					Aceptar: function() {
+						jQuery(this).dialog('close');
+					}
+				}
 			});
 		})
 	</script>

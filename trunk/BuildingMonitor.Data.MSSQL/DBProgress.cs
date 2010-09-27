@@ -72,7 +72,7 @@ namespace BuildingMonitor.Data
 			return sph.ExecuteDataset();
 		}
 
-		public static bool Add(int contractId,
+		public static IDataReader Add(int contractId,
 			int projectId,
 			int blockId,
 			int workId,
@@ -83,26 +83,20 @@ namespace BuildingMonitor.Data
 			int currentProgress,
 			string user)
 		{
-			StringBuilder sb = new StringBuilder();
-			
-			sb.Append("INSERT INTO uAvance ");
-			sb.Append("(IdContrato,IdProyecto,IdBloque,IdObra,IdGrupo,IdItem,IdSubItem,AvanceInicial,AvanceActual,Usuario,Fecha)");
-			sb.Append(" VALUES ");
-			sb.AppendFormat("({0},{1},{2},{3},{4},{5},{6},{7},{8},'{9}',GETDATE())", contractId, projectId, blockId, workId, groupId, itemId, subItemId, initialProgress, currentProgress, user);
+			SqlParameter[] parameters = new SqlParameter[10];
 
-			SqlParameterHelper sph = new SqlParameterHelper(DBHelper.Instance.ConnectionString, sb.ToString(), CommandType.Text, 0);
-			int rows = 0;
-			
-			try
-			{
-				rows = sph.ExecuteNonQuery();
-			}
-			catch(Exception)
-			{
-				rows = 0;
-			}
-			
-			return rows > 0;
+			parameters[0] = new SqlParameter("@ContractId", contractId);
+			parameters[1] = new SqlParameter("@ProjectId", projectId);
+			parameters[2] = new SqlParameter("@BlockId", blockId);
+			parameters[3] = new SqlParameter("@WorkId", workId);
+			parameters[4] = new SqlParameter("@GroupId", groupId);
+			parameters[5] = new SqlParameter("@ItemId", itemId);
+			parameters[6] = new SqlParameter("@SubItemId", subItemId);
+			parameters[7] = new SqlParameter("@InitialProgress", initialProgress);
+			parameters[8] = new SqlParameter("@CurrentProgress", currentProgress);
+			parameters[9] = new SqlParameter("@User", user);
+
+			return SqlHelper.ExecuteReader(DBHelper.Instance.ConnectionString, CommandType.StoredProcedure, "bm_ProgressSave", parameters);
 		}
 
 		public static bool Add(Dictionary<string, object>[] batchProgress)

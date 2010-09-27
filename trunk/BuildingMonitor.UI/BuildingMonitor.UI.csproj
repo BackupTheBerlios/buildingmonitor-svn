@@ -148,13 +148,6 @@
     <Compile Include="BuildingMonitor\Contracts.aspx.designer.cs">
       <DependentUpon>Contracts.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BuildingMonitor\Controls\DateChooser.ascx.cs">
-      <DependentUpon>DateChooser.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="BuildingMonitor\Controls\DateChooser.ascx.designer.cs">
-      <DependentUpon>DateChooser.ascx</DependentUpon>
-    </Compile>
     <Compile Include="BuildingMonitor\Controls\NavProjectToItem.ascx.cs">
       <DependentUpon>NavProjectToItem.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -196,6 +189,13 @@
     </Compile>
     <Compile Include="BuildingMonitor\ContractAddSuccess.aspx.designer.cs">
       <DependentUpon>ContractAddSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingMonitor\Controls\NavProjectToItemPath.ascx.cs">
+      <DependentUpon>NavProjectToItemPath.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\Controls\NavProjectToItemPath.ascx.designer.cs">
+      <DependentUpon>NavProjectToItemPath.ascx</DependentUpon>
     </Compile>
     <Compile Include="BuildingMonitor\PaymentPaidWorkSuccess.aspx.cs">
       <DependentUpon>PaymentPaidWorkSuccess.aspx</DependentUpon>
@@ -309,14 +309,15 @@
     <Content Include="BuildingMonitor\ClientScript\contract-add.js" />
     <Content Include="BuildingMonitor\ClientScript\library-min.js" />
     <Content Include="BuildingMonitor\ClientScript\main.js" />
+    <Content Include="BuildingMonitor\ClientScript\progress-recording.js" />
     <Content Include="BuildingMonitor\Contracts.aspx" />
-    <Content Include="BuildingMonitor\Controls\DateChooser.ascx" />
     <Content Include="BuildingMonitor\Controls\NavProjectToItem.ascx" />
     <Content Include="BuildingMonitor\ContractAdd.aspx" />
     <Content Include="BuildingMonitor\AdminProgressRecording.aspx" />
     <Content Include="BuildingMonitor\ContractDetail.aspx" />
     <Content Include="BuildingMonitor\ContractCanceledSuccess.aspx" />
     <Content Include="BuildingMonitor\ContractAddSuccess.aspx" />
+    <Content Include="BuildingMonitor\Controls\NavProjectToItemPath.ascx" />
     <Content Include="BuildingMonitor\Img\Amarillo.jpg" />
     <Content Include="BuildingMonitor\Img\Rojo.jpg" />
     <Content Include="BuildingMonitor\Img\Verde.jpg" />

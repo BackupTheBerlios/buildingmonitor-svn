@@ -43,7 +43,15 @@
 
 	<fieldset id="contract-detail">
 		<legend><asp:Literal ID="litTabDetail" runat="server" /></legend>
-		<div style="float:right;width:68%;padding:0 0.5em">
+		<div style="padding:0.5em" class="ui-widget-content ui-corner-all bm-navigator">
+			<asp:UpdatePanel ID="pnlMain" runat="server">
+				<ContentTemplate>
+					<uc1:NavProjectToItem ID="navProjectToItem" runat="server" />
+					<asp:HiddenField ID="hdnDataRef" runat="server" EnableViewState="false" />
+				</ContentTemplate>
+			</asp:UpdatePanel>
+		</div>
+		<div style="padding:0 0.5em">
 			<div class="settingrow">
 				<asp:LinkButton ID="lnkRemoveRow" runat="server" OnClientClick="beforeRemoveRows()" Text="Borrar Seleccionados"/> | 
 				<a href="javascript:bmSetRefPriceTotal('<% Response.Write(tblContractDetail.ClientID); %>');bmContractSumTotal('<% Response.Write(tblContractDetail.ClientID); %>','subitem-price-total','bm-total')">Usar Dato Referencial</a>	
@@ -62,14 +70,6 @@
 					<asp:TableCell CssClass="bm-total bm-number"></asp:TableCell>
 				</asp:TableFooterRow>
 			</asp:Table>
-		</div>
-		<div style="width:28%;padding:0.5em" class="ui-widget-content ui-corner-all bm-navigator">
-			<asp:UpdatePanel ID="pnlMain" runat="server">
-				<ContentTemplate>
-					<uc1:NavProjectToItem ID="navProjectToItem" runat="server" />
-					<asp:HiddenField ID="hdnDataRef" runat="server" EnableViewState="false" />
-				</ContentTemplate>
-			</asp:UpdatePanel>
 		</div>
 	</fieldset>
 	<fieldset>
