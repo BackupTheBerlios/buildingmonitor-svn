@@ -14,7 +14,7 @@ namespace BuildingMonitor.Data
 	{
 		public static String DBPlatform()
 		{
-			return "MSSQL";
+			return "MSSQL";;
 		}
 
 		public static DataSet AvancePorcentual_Bloque(int IdProyecto, int IdGrupo)
