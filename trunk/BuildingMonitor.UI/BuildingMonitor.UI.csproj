@@ -239,6 +239,13 @@
     <Compile Include="BuildingMonitor\ProgressRecordingEdit.aspx.designer.cs">
       <DependentUpon>ProgressRecordingEdit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BuildingMonitor\ResumenRiesgo.aspx.cs">
+      <DependentUpon>ResumenRiesgo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\ResumenRiesgo.aspx.designer.cs">
+      <DependentUpon>ResumenRiesgo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\BuildingComparer.cs" />
     <Compile Include="Helpers\Converter.cs" />
     <Compile Include="Helpers\Formatter.cs" />
@@ -327,6 +334,7 @@
     <Content Include="BuildingMonitor\Payment.aspx" />
     <Content Include="BuildingMonitor\ProgressRecording.aspx" />
     <Content Include="BuildingMonitor\ProgressRecordingEdit.aspx" />
+    <Content Include="BuildingMonitor\ResumenRiesgo.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -71,6 +71,7 @@ namespace BuildingMonitor.UI
             hplContract.NavigateUrl = "Contracts.aspx" + paramsGet + "&target=contract";
 			hplPayment.NavigateUrl = "Contracts.aspx" + paramsGet + "&target=payment";
 			hplAnalisisRiesgo.NavigateUrl = "AnalisisRiesgo.aspx" + paramsGet;
+			hplResumenRiesgo.NavigateUrl = "ResumenRiesgo.aspx" + paramsGet;
 		}
 
 
@@ -81,6 +82,7 @@ namespace BuildingMonitor.UI
             hplContract.Text = "Contratos";
 			hplPayment.Text = "Pagos";
 			hplAnalisisRiesgo.Text = "Analisis de Riesgo";
+			hplResumenRiesgo.Text = "Resumen de Analisis de Riesgo";
 		}
 
 		private void LoadSettings()

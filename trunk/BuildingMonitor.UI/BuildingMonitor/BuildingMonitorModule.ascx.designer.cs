@@ -86,6 +86,15 @@ namespace BuildingMonitor.UI {
         protected global::System.Web.UI.WebControls.HyperLink hplAnalisisRiesgo;
         
         /// <summary>
+        /// hplResumenRiesgo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hplResumenRiesgo;
+        
+        /// <summary>
         /// cbottom1 control.
         /// </summary>
         /// <remarks>

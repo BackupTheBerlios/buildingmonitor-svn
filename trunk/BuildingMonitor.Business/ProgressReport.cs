@@ -12,5 +12,10 @@ namespace BuildingMonitor.Business
 		{
 			return DBProgressReport.AvancePorcentual(IdProyecto, IdBloque, IdObra, IdGrupo);
 		}
+
+		public static DataSet AvancePorcentual_Bloque(int IdProyecto, int IdGrupo)
+		{
+			return DBProgressReport.AvancePorcentual_Bloque(IdProyecto, IdGrupo);
+		}
     }
 }

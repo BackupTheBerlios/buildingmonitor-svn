@@ -18,6 +18,9 @@
 <div class="settingrow">
     <asp:HyperLink ID="hplAnalisisRiesgo" runat="server" />
 </div>
+<div class="settingrow">
+    <asp:HyperLink ID="hplResumenRiesgo" runat="server" />
+</div>
 
 </asp:Panel>
 </asp:Panel>
