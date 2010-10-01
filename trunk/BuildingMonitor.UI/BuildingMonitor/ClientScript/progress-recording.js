@@ -91,7 +91,7 @@ function bmProgressRecActive(flag) {
 
 		tr.find('.bm-progress-slider').slider(flag ? 'enable' : 'disable');
 
-		if (flag) {
+		if (flag)
 			tr.find('.bm-progress-status').attr('class', 'bm-progress-status');
 	});
 }

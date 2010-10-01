@@ -1,6 +1,7 @@
 <%@ Page Language="C#" AutoEventWireup="false" MasterPageFile="~/App_MasterPages/layout.Master" CodeBehind="ContractAdd.aspx.cs" Inherits="BuildingMonitor.UI.ContractAddPage" %>
 
 <%@ Register src="Controls/NavProjectToItem.ascx" tagname="NavProjectToItem" tagprefix="uc1" %>
+<%@ Register src="Controls/NavProjectToItemPath.ascx" tagname="NavProjectToItemPath" tagprefix="uc2" %>
 
 <asp:Content ContentPlaceHolderID="leftContent" ID="MPLeftPane" runat="server" >
 </asp:Content>
@@ -43,14 +44,19 @@
 
 	<fieldset id="contract-detail">
 		<legend><asp:Literal ID="litTabDetail" runat="server" /></legend>
-		<div style="padding:0.5em" class="ui-widget-content ui-corner-all bm-navigator">
+		
 			<asp:UpdatePanel ID="pnlMain" runat="server">
 				<ContentTemplate>
-					<uc1:NavProjectToItem ID="navProjectToItem" runat="server" />
+					<div class="ui-widget-content ui-corner-all bm-navigator">
+						<uc1:NavProjectToItem ID="navProjectToItem" runat="server" />
+					</div>
 					<asp:HiddenField ID="hdnDataRef" runat="server" EnableViewState="false" />
+					<div class="bm-navigator-path">
+						<uc2:NavProjectToItemPath ID="navProjectToItemPath" runat="server" />
+					</div>
 				</ContentTemplate>
 			</asp:UpdatePanel>
-		</div>
+		
 		<div style="padding:0 0.5em">
 			<div class="settingrow">
 				<asp:LinkButton ID="lnkRemoveRow" runat="server" OnClientClick="beforeRemoveRows()" Text="Borrar Seleccionados"/> | 
@@ -110,13 +116,13 @@
 	
 	<script type="text/javascript">
 		function onBeginRequest(sender, args) {
-			bmLoadingAnimation('progress-animation', 'contract-detail', true);
+			bmLoadingAnimation('progress-animation', '<% Response.Write(pnl1.ClientID); %>', true);
 		}
 		function onEndRequest(sender, args) {
 			bmContractFillSubItemsDetail('<% Response.Write(hdnDataRef.ClientID); %>', '<% Response.Write(tblContractDetail.ClientID); %>')
 			bmContractSumTotal('<% Response.Write(tblContractDetail.ClientID); %>', 'subitem-price-total', 'bm-total', true);
 			bmContractPaidWorkSetBalance('<% Response.Write(tblPayment.ClientID); %>', '<% Response.Write(tblContractDetail.ClientID); %>', 'bm-total', '<% Response.Write(txtAdvance.ClientID); %>');
-			bmLoadingAnimation('progress-animation', 'contract-detail', false);
+			bmLoadingAnimation('progress-animation', '<% Response.Write(pnl1.ClientID); %>', false);
 		}
 		function updateCheckIsPaidWork() {
 			if (this.checked)

@@ -348,6 +348,7 @@ namespace BuildingMonitor.UI
 		{
 			base.OnInit(e);
 
+			navProjectToItemPath.SetSource(navProjectToItem);
 			Load += new EventHandler(Page_Load);
 			navProjectToItem.ClickLinkItem += new UserControls.NavProjectToItem.ClickEventHandler(navProjectToItem_ClickLinkItem);
 			btnSave.Click += new EventHandler(btnSave_Click);
