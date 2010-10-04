@@ -12,13 +12,34 @@ namespace BuildingMonitor.UI.BuildingMonitor.Controls
 {
 	public partial class NavProjectToItem : System.Web.UI.UserControl
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public enum NavItem
 		{
+			/// <summary>
+			/// 
+			/// </summary>
 			None = -1,
+			/// <summary>
+			/// 
+			/// </summary>
 			Project = 0,
+			/// <summary>
+			/// 
+			/// </summary>
 			Block = 1,
+			/// <summary>
+			/// 
+			/// </summary>
 			Work = 2,
+			/// <summary>
+			/// 
+			/// </summary>
 			Group = 3,
+			/// <summary>
+			/// 
+			/// </summary>
 			Item = 4
 		}
 
@@ -256,12 +277,11 @@ namespace BuildingMonitor.UI.BuildingMonitor.Controls
 
 		private void PopulateLabels()
 		{
-			lblProject.Text = BuildingMonitorResources.LabelProject;
-			lblBlock.Text = BuildingMonitorResources.LabelBlock;
-			lblWork.Text = BuildingMonitorResources.LabelWork;
-			lblGroup.Text = BuildingMonitorResources.LabelGroup;
-			lblItem.Text = BuildingMonitorResources.LabelItem;
-			litHeading.Text = BuildingMonitorResources.ContractEditSelectNavigator;
+			litProject.Text = BuildingMonitorResources.LabelProject;
+			litBlock.Text = BuildingMonitorResources.LabelBlock;
+			litWork.Text = BuildingMonitorResources.LabelWork;
+			litGroup.Text = BuildingMonitorResources.LabelGroup;
+			litItem.Text = BuildingMonitorResources.LabelItem;
 		}
 
 		#endregion
