@@ -234,6 +234,20 @@ namespace BuildingMonitor.Data
 			return sph.ExecuteReader();
 		}
 
+		public static DataSet GetAllContract(int contractorId)
+		{
+			StringBuilder sb = new StringBuilder();
+
+			sb.Append("SELECT Id,");
+			sb.Append("SUBSTRING(Glosa, 0, 50) Glosa ");
+			sb.AppendFormat("FROM uContrato ");
+			sb.AppendFormat("WHERE IdContratista = {0}", contractorId);
+
+			SqlParameterHelper sph = new SqlParameterHelper(DBHelper.Instance.ConnectionString, sb.ToString(), CommandType.Text, 0);
+
+			return sph.ExecuteDataset();
+		}
+
 		public static DataSet GetAll(int contractorId, bool isPaidWork, string status)
 		{
 			string prefix = DBHelper.Instance.TablePrefix;
