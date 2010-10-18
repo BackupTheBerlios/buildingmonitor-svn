@@ -275,6 +275,11 @@ namespace BuildingMonitor.Business
 			return DBContract.GetAll(contractorId, isPaidWork, ToString(status));
 		}
 
+		public static DataSet GetAllContract(int contractorId)
+		{
+			return DBContract.GetAllContract(contractorId);
+		}
+
 		public static IDataReader PayablePaidWorkPlan(int contractId)
 		{
 			return DBContract.PayablePaidWorkPlan(contractId);
