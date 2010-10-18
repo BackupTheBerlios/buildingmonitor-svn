@@ -13,6 +13,9 @@
     <asp:HyperLink ID="hplProgressRecording" runat="server" />
 </div>
 <div class="settingrow">
+    <asp:HyperLink ID="hplDetalleAvance" runat="server" />
+</div>
+<div class="settingrow">
     <asp:HyperLink ID="hplPayment" runat="server" />
 </div>
 <div class="settingrow">

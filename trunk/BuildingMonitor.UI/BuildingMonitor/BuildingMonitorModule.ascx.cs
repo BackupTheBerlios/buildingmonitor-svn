@@ -68,6 +68,7 @@ namespace BuildingMonitor.UI
 			}
 
             hplProgressRecording.NavigateUrl = ResolveUrl("ProgressRecordingEdit.aspx") + paramsGet;
+			hplDetalleAvance.NavigateUrl = "DetalleAvance.aspx" + paramsGet;
             hplContract.NavigateUrl = "Contracts.aspx" + paramsGet + "&target=contract";
 			hplPayment.NavigateUrl = "Contracts.aspx" + paramsGet + "&target=payment";
 			hplAnalisisRiesgo.NavigateUrl = "AnalisisRiesgo.aspx" + paramsGet;
@@ -79,6 +80,7 @@ namespace BuildingMonitor.UI
 		{
 			TitleControl.EditText = "Administraci&oacute;n";
             hplProgressRecording.Text = BuildingMonitorResources.ProgressRec;
+			hplDetalleAvance.Text = "Detalle de Avance";
             hplContract.Text = "Contratos";
 			hplPayment.Text = "Pagos";
 			hplAnalisisRiesgo.Text = "Analisis de Riesgo";
