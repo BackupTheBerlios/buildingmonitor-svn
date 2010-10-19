@@ -29,6 +29,7 @@
     </div>
     <div style="margin:0.5em 0">
     <asp:Literal ID="litAvanceGral" runat="server" />
+    <img src="Img/Critico.jpg" style="vertical-align:middle" /> <asp:Literal ID="litCritico" runat="server" />
     <img src="Img/Rojo.jpg" style="vertical-align:middle" /> <asp:Literal ID="litRed" runat="server" />
     <img src="Img/Amarillo.jpg" style="vertical-align:middle" /> <asp:Literal ID="litYellow" runat="server" />
     <img src="Img/Verde.jpg" style="vertical-align:middle" /> <asp:Literal ID="litGreen" runat="server" />

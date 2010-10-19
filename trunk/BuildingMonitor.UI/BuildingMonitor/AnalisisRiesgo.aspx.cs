@@ -22,7 +22,7 @@ namespace BuildingMonitor.UI
 		decimal _PromedioGralAvance = -1;
 		private int _pageId = -1;
 		private int _moduleId = -1;
-		private int[] _totalCount = new int[3];
+		private int[] _totalCount = new int[4];
 		
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -63,6 +63,7 @@ namespace BuildingMonitor.UI
 			_totalCount[0] = 0;
 			_totalCount[1] = 0;
 			_totalCount[2] = 0;
+			_totalCount[3] = 0;
 		}
 
 		private void PopulateControls()
@@ -186,11 +187,12 @@ namespace BuildingMonitor.UI
 
 		private void MostrarResumen()
 		{
-			int total = Math.Max(_totalCount[0] + _totalCount[1] + _totalCount[2], 1);
+			int total = Math.Max(_totalCount[0] + _totalCount[1] + _totalCount[2] + _totalCount[3], 1);
 
-			litRed.Text = string.Format("Total: {0} &nbsp; Porcentaje: {1}% &nbsp; ", _totalCount[0], Helpers.Formatter.Decimal(Math.Round((decimal)100 * _totalCount[0] / total, 2)));
-			litYellow.Text = string.Format("Total: {0} &nbsp; Porcentaje: {1}% &nbsp; ", _totalCount[1], Helpers.Formatter.Decimal(Math.Round((decimal)100 * _totalCount[1] / total, 2)));
-			litGreen.Text = string.Format("Total: {0} &nbsp; Porcentaje: {1}% &nbsp; ", _totalCount[2], Helpers.Formatter.Decimal(Math.Round((decimal)100 * _totalCount[2] / total, 2)));
+			litCritico.Text = string.Format("Total: {0} &nbsp; Porcentaje: {1}% &nbsp; ", _totalCount[0], Helpers.Formatter.Decimal(Math.Round((decimal)100 * _totalCount[0] / total, 2)));
+			litRed.Text = string.Format("Total: {0} &nbsp; Porcentaje: {1}% &nbsp; ", _totalCount[1], Helpers.Formatter.Decimal(Math.Round((decimal)100 * _totalCount[1] / total, 2)));
+			litYellow.Text = string.Format("Total: {0} &nbsp; Porcentaje: {1}% &nbsp; ", _totalCount[2], Helpers.Formatter.Decimal(Math.Round((decimal)100 * _totalCount[2] / total, 2)));
+			litGreen.Text = string.Format("Total: {0} &nbsp; Porcentaje: {1}% &nbsp; ", _totalCount[3], Helpers.Formatter.Decimal(Math.Round((decimal)100 * _totalCount[3] / total, 2)));
 			litAvanceGral.Text = string.Format("Avance General: {0}%<br /><br />", Helpers.Formatter.Decimal(_PromedioGralAvance));
 		}
 		
@@ -198,19 +200,25 @@ namespace BuildingMonitor.UI
 		{
 			decimal dPorcentajeAvance = Convert.ToDecimal(obj);
 
-			if (dPorcentajeAvance < _PromedioGralAvance - 5)
+			if (dPorcentajeAvance < _PromedioGralAvance - 10)
 			{
 				_totalCount[0]++;
+				return "Critico.jpg";
+			}
+
+			if (dPorcentajeAvance < _PromedioGralAvance - 5)
+			{
+				_totalCount[1]++;
 				return "Rojo.jpg";
 			}
 
 			if (dPorcentajeAvance < _PromedioGralAvance + 5)
 			{
-				_totalCount[1]++;
+				_totalCount[2]++;
 				return "Amarillo.jpg";
 			}
 
-			_totalCount[2]++;
+			_totalCount[3]++;
 
 			return "Verde.jpg";
 		}
