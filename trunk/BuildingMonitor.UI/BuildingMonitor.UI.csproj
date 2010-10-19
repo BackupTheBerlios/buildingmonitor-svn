@@ -197,6 +197,13 @@
     <Compile Include="BuildingMonitor\Controls\NavProjectToItemPath.ascx.designer.cs">
       <DependentUpon>NavProjectToItemPath.ascx</DependentUpon>
     </Compile>
+    <Compile Include="BuildingMonitor\DetalleAvance.aspx.cs">
+      <DependentUpon>DetalleAvance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuildingMonitor\DetalleAvance.aspx.designer.cs">
+      <DependentUpon>DetalleAvance.aspx</DependentUpon>
+    </Compile>
     <Compile Include="BuildingMonitor\PaymentPaidWorkSuccess.aspx.cs">
       <DependentUpon>PaymentPaidWorkSuccess.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -325,7 +332,9 @@
     <Content Include="BuildingMonitor\ContractCanceledSuccess.aspx" />
     <Content Include="BuildingMonitor\ContractAddSuccess.aspx" />
     <Content Include="BuildingMonitor\Controls\NavProjectToItemPath.ascx" />
+    <Content Include="BuildingMonitor\DetalleAvance.aspx" />
     <Content Include="BuildingMonitor\Img\Amarillo.jpg" />
+    <Content Include="BuildingMonitor\Img\Critico.jpg" />
     <Content Include="BuildingMonitor\Img\Rojo.jpg" />
     <Content Include="BuildingMonitor\Img\Verde.jpg" />
     <Content Include="BuildingMonitor\PaymentPaidWorkSuccess.aspx" />
@@ -355,7 +364,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2711</DevelopmentServerPort>
+          <DevelopmentServerPort>3489</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
