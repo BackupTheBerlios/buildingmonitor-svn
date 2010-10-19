@@ -46,6 +46,7 @@
     <div align="center" style="font-weight: bold">
     <asp:Label ID="Label2" runat = "server" Text="Porcentaje de Avance por Bloque"></asp:Label><br /><br />
     </div>
+    <img src="Img/Critico.jpg" style="vertical-align:middle" /><asp:Label ID="lblCritico" runat = "server"  ></asp:Label> 
     <img src="Img/Rojo.jpg" style="vertical-align:middle" /><asp:Label ID="lblRojo" runat = "server"  ></asp:Label> 
     <img src="Img/Amarillo.jpg" style="vertical-align:middle" /><asp:Label ID="lblAmarillo" runat = "server"  ></asp:Label>
     <img src="Img/Verde.jpg" style="vertical-align:middle" /><asp:Label ID="lblVerde" runat = "server"  ></asp:Label>
@@ -85,6 +86,7 @@
     <asp:Label ID="Label3" runat = "server" Text="An&aacute;lisis de Riesgo por Bloque"   ></asp:Label><br /><br />
     </div>
     <div style="margin:0.5em 0.5em">
+    <img src="Img/Critico.jpg" style="vertical-align:middle" /><asp:Label ID="lblCriticoResumen" runat = "server"  ></asp:Label>
     <img src="Img/Rojo.jpg" style="vertical-align:middle" /><asp:Label ID="lblRojoResumen" runat = "server"  ></asp:Label> 
     <img src="Img/Amarillo.jpg" style="vertical-align:middle" /><asp:Label ID="lblAmarilloResumen" runat = "server"  ></asp:Label>
     <img src="Img/Verde.jpg" style="vertical-align:middle" /><asp:Label ID="lblVerdeResumen" runat = "server"  ></asp:Label>
@@ -94,13 +96,16 @@
     <HeaderTemplate >
     <thead>
     <tr>
-    <th>Bloque</th><th><img src="img/Rojo.jpg" alt="" /></th><th><img src="img/Amarillo.jpg" alt="" /></th><th><img src="img/Verde.jpg" alt="" /></th>
+    <th>Bloque</th><th><img src="img/Critico.jpg" alt="" /></th><th><img src="img/Rojo.jpg" alt="" /></th><th><img src="img/Amarillo.jpg" alt="" /></th><th><img src="img/Verde.jpg" alt="" /></th>
     </thead>
     </HeaderTemplate>
     <ItemTemplate>
     <tr  >
     <td>
     <%# Eval("Bloque") %>
+    </td>
+    <td class="bm-number">
+    <%# Eval("Critico") %>
     </td>
     <td class="bm-number">
     <%# Eval("Rojo") %>

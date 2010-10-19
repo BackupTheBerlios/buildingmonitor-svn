@@ -113,6 +113,15 @@ namespace BuildingMonitor.UI {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
+        /// lblCritico control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCritico;
+        
+        /// <summary>
         /// lblRojo control.
         /// </summary>
         /// <remarks>
@@ -156,6 +165,15 @@ namespace BuildingMonitor.UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label3;
+        
+        /// <summary>
+        /// lblCriticoResumen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCriticoResumen;
         
         /// <summary>
         /// lblRojoResumen control.

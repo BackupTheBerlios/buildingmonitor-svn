@@ -22,7 +22,7 @@ namespace BuildingMonitor.UI
 		decimal _PromedioGralAvance = -1;
 		private int _pageId = -1;
 		private int _moduleId = -1;
-		private int[] _colCantidad = new int[3] {0,0,0};
+		private int[] _colCantidad = new int[4] {0,0,0,0};
 		
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -126,12 +126,13 @@ namespace BuildingMonitor.UI
 				ds.Tables[0].DefaultView.Sort = "PorcentajeAvance desc ";
 				gridView.DataSource = ds.Tables[0].DefaultView;//  m_bd.FillCombo(, "select '', -1 union select Convert(varchar(10), Id) + ' - ' + Nombre,Id from uProyecto", 0, 1);
 				gridView.DataBind();
-				
-				nTotal = Math.Max(_colCantidad[0] + _colCantidad[1] + _colCantidad[2],1);
+
+				nTotal = Math.Max(_colCantidad[0] + _colCantidad[1] + _colCantidad[2] + _colCantidad[3], 1);
 				lblGeneral.Text = string.Format("Avance General: {0}%", Helpers.Formatter.Decimal(_PromedioGralAvance));
-				lblRojo.Text = string.Format(" Total: {0}  Porcentaje: {1}%", _colCantidad[0], Helpers.Formatter.Decimal((decimal)100 * _colCantidad[0] / nTotal));
-				lblAmarillo.Text = string.Format(" Total: {0}  Porcentaje: {1}%", _colCantidad[1], Helpers.Formatter.Decimal((decimal)100 * _colCantidad[1] / nTotal));
-				lblVerde.Text = string.Format(" Total: {0}  Porcentaje: {1}%", _colCantidad[2], Helpers.Formatter.Decimal((decimal)100 * _colCantidad[2] / nTotal));
+				lblCritico.Text = string.Format(" Total: {0}  Porcentaje: {1}%", _colCantidad[0], Helpers.Formatter.Decimal((decimal)100 * _colCantidad[0] / nTotal));
+				lblRojo.Text = string.Format(" Total: {0}  Porcentaje: {1}%", _colCantidad[1], Helpers.Formatter.Decimal((decimal)100 * _colCantidad[1] / nTotal));
+				lblAmarillo.Text = string.Format(" Total: {0}  Porcentaje: {1}%", _colCantidad[2], Helpers.Formatter.Decimal((decimal)100 * _colCantidad[2] / nTotal));
+				lblVerde.Text = string.Format(" Total: {0}  Porcentaje: {1}%", _colCantidad[3], Helpers.Formatter.Decimal((decimal)100 * _colCantidad[3] / nTotal));
 				
 				CargarResumen();
 			}			
@@ -142,12 +143,13 @@ namespace BuildingMonitor.UI
 			int IdProyecto = Convert.ToInt32(m_cmbProyecto.SelectedValue);
 			int IdGrupo    = Convert.ToInt32(m_cmbGrupo.SelectedValue);
 			string strBloque = string.Empty;
-			int[] colCantidad = new int[3] {0,0,0};
-			int[] colCantidadSum = new int[3] { 0, 0, 0 };
+			int[] colCantidad = new int[4] {0,0,0,0};
+			int[] colCantidadSum = new int[4] { 0, 0, 0, 0 };
 			DataTable dt = new DataTable();
 			DataSet ds = ProgressReport.AvancePorcentual(IdProyecto,-1,-1, IdGrupo);
 			
 			dt.Columns.Add("Bloque", System.Type.GetType("System.String"));
+			dt.Columns.Add("Critico", System.Type.GetType("System.Int32"));
 			dt.Columns.Add("Rojo", System.Type.GetType("System.Int32"));
 			dt.Columns.Add("Amarillo", System.Type.GetType("System.Int32"));
 			dt.Columns.Add("Verde", System.Type.GetType("System.Int32"));
@@ -163,28 +165,33 @@ namespace BuildingMonitor.UI
 				
 				if ( strBloque != row["Bloque"].ToString() )
 				{
-					colCantidad[0] = 0; colCantidad[1] = 0; colCantidad[2] = 0;
+					colCantidad[0] = 0; colCantidad[1] = 0; colCantidad[2] = 0; colCantidad[3] = 0;
 					strBloque = row["Bloque"].ToString();
 				}
 				
 				while (strBloque == row["Bloque"].ToString() && nIndex < ds.Tables[0].Rows.Count)
 				{
 					decimal dPorcentajeAvance =	Convert.ToDecimal(row["PorcentajeAvance"]);
-					
-					if ( dPorcentajeAvance < _PromedioGralAvance - 5M )//rojo
+
+					if (dPorcentajeAvance < _PromedioGralAvance - 10M)//rojo
 					{
 						colCantidad[0]++;
 						colCantidadSum[0]++;
 					}
-					else if (dPorcentajeAvance < _PromedioGralAvance + 5M)//naranja
+					else if ( dPorcentajeAvance < _PromedioGralAvance - 5M )//rojo
 					{
 						colCantidad[1]++;
 						colCantidadSum[1]++;
 					}
-					else 
+					else if (dPorcentajeAvance < _PromedioGralAvance + 5M)//naranja
 					{
 						colCantidad[2]++;
 						colCantidadSum[2]++;
+					}
+					else 
+					{
+						colCantidad[3]++;
+						colCantidadSum[3]++;
 					}
 
 					nIndex++;
@@ -195,21 +202,23 @@ namespace BuildingMonitor.UI
 				
 				DataRow rowNew = dt.NewRow();
 				rowNew["Bloque"] = strBloque;
-				rowNew["Rojo"] = colCantidad[0];
-				rowNew["Amarillo"] = colCantidad[1];
-				rowNew["Verde"] = colCantidad[2];
+				rowNew["Critico"] = colCantidad[0];
+				rowNew["Rojo"] = colCantidad[1];
+				rowNew["Amarillo"] = colCantidad[2];
+				rowNew["Verde"] = colCantidad[3];
 				dt.Rows.Add(rowNew);
 											
 			}
 
-			dt.DefaultView.Sort = "Rojo,Amarillo,Verde desc ";
+			dt.DefaultView.Sort = "Critico,Rojo,Amarillo,Verde desc ";
 			gridViewResumen.DataSource = dt.DefaultView;
 			gridViewResumen.DataBind();
 
-			int nTotal = Math.Max(colCantidadSum[0] + colCantidadSum[1] + colCantidadSum[2], 1);
-			lblRojoResumen.Text = string.Format(" Total: {0}  Porcentaje: {1}%", colCantidadSum[0], Helpers.Formatter.Decimal((decimal)100 * colCantidadSum[0] / nTotal));
-			lblAmarilloResumen.Text = string.Format(" Total: {0}  Porcentaje: {1}%", colCantidadSum[1], Helpers.Formatter.Decimal((decimal)100 * colCantidadSum[1] / nTotal));
-			lblVerdeResumen.Text = string.Format(" Total: {0}  Porcentaje: {1}%", colCantidadSum[2], Helpers.Formatter.Decimal((decimal)100 * colCantidadSum[2] / nTotal));
+			int nTotal = Math.Max(colCantidadSum[0] + colCantidadSum[1] + colCantidadSum[2] + colCantidadSum[3], 1);
+			lblCriticoResumen.Text = string.Format(" Total: {0}  Porcentaje: {1}%", colCantidadSum[0], Helpers.Formatter.Decimal((decimal)100 * colCantidadSum[0] / nTotal));
+			lblRojoResumen.Text = string.Format(" Total: {0}  Porcentaje: {1}%", colCantidadSum[1], Helpers.Formatter.Decimal((decimal)100 * colCantidadSum[1] / nTotal));
+			lblAmarilloResumen.Text = string.Format(" Total: {0}  Porcentaje: {1}%", colCantidadSum[2], Helpers.Formatter.Decimal((decimal)100 * colCantidadSum[2] / nTotal));
+			lblVerdeResumen.Text = string.Format(" Total: {0}  Porcentaje: {1}%", colCantidadSum[3], Helpers.Formatter.Decimal((decimal)100 * colCantidadSum[3] / nTotal));
 			
 			//
 			dt.Dispose();
@@ -219,19 +228,24 @@ namespace BuildingMonitor.UI
 		protected string algo(object obj)
 		{
 			decimal dPorcentajeAvance = Convert.ToDecimal(obj);
-			
-			if ( dPorcentajeAvance < _PromedioGralAvance - 3.5M )//rojo
+
+			if (dPorcentajeAvance < _PromedioGralAvance - 5M)//rojo
 			{
 				_colCantidad[0]++;
+				return "Critico.jpg";
+			}
+			if ( dPorcentajeAvance < _PromedioGralAvance - 3.5M )//rojo
+			{
+				_colCantidad[1]++;
 				return "Rojo.jpg";
 			}
 			if (dPorcentajeAvance < _PromedioGralAvance + 4.5M)//naranja
 			{
-				_colCantidad[1]++;
+				_colCantidad[2]++;
 				return "Amarillo.jpg";
 			}
 
-			_colCantidad[2]++;
+			_colCantidad[3]++;
 			return "Verde.jpg";
 		}
 
