@@ -135,9 +135,10 @@ namespace BuildingMonitor.Data
 				foreach (DBContractDetail detail in listDetail)
 				{
 					command.CommandText = "INSERT INTO uContratoDetalle " +
-						"(IdProyecto,IdBloque,IdObra,IdGrupo,IdItem,IdSubItem,IdContrato,Precio)" +
+						"(IdProyecto,IdBloque,IdObra,IdGrupo,IdItem,IdSubItem,IdContrato,AvanceInicial,PrecioReal,Precio)" +
 						" VALUES " +
-						string.Format("({0},{1},{2},{3},{4},{5},{6},{7})", detail.ProjectId, detail.BlockId, detail.WorkId, detail.GroupId, detail.ItemId, detail.SubItemId, identity, DBConverter.ToSafeDecimal(detail.Price));
+						string.Format("({0},{1},{2},{3},{4},{5},{6},{7},{8},{8})", detail.ProjectId, detail.BlockId, detail.WorkId, detail.GroupId, detail.ItemId, detail.SubItemId, identity, detail.Progress, DBConverter.ToSafeDecimal(detail.Price));
+
 					command.ExecuteNonQuery();
 				}
 
