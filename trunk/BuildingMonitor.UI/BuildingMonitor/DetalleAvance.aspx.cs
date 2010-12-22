@@ -194,6 +194,8 @@ namespace BuildingMonitor.UI
 			int IdGrupo = -1;
 			int IdContratista = -1;
 			int IdContrato = -1;
+			DateTime dtFInicio = DateTime.Now;
+			DateTime dtFFin = DateTime.Now;
 			
 			int.TryParse(m_cmbProyecto.SelectedValue, out IdProyecto);
 			int.TryParse(m_cmbBloque.SelectedValue, out IdBloque);
@@ -201,8 +203,10 @@ namespace BuildingMonitor.UI
 			int.TryParse(m_cmbGrupo.SelectedValue, out IdGrupo);
 			int.TryParse(m_cmbContratista.SelectedValue, out IdContratista);
 			int.TryParse(m_cmbContrato.SelectedValue, out IdContrato);
-
-			using (DataSet ds = ProgressReport.DetalleAvance(IdProyecto, IdBloque, IdObra, IdGrupo, IdContratista, IdContrato))
+			DateTime.TryParse(txtDateStart.Text, out dtFInicio);
+			DateTime.TryParse(txtDateEnd.Text, out dtFFin);
+			
+			using (DataSet ds = ProgressReport.DetalleAvance(IdProyecto, IdBloque, IdObra, IdGrupo, IdContratista, IdContrato, m_chkFecha.Checked, dtFInicio, dtFFin))
 			{
 				gridView.DataSource = ds.Tables[0].DefaultView;
 				gridView.DataBind();
