@@ -153,7 +153,7 @@ namespace BuildingMonitor.Data
 			return ds;
 		}
 
-		public static DataSet DetalleAvance(int IdProyecto, int IdBloque, int IdObra, int IdGrupo, int IdContratista, int IdContrato)
+		public static DataSet DetalleAvance(int IdProyecto, int IdBloque, int IdObra, int IdGrupo, int IdContratista, int IdContrato,bool bFiltrarFecha, DateTime dtFInicio, DateTime dtFechaFin)
 		{
 			StringBuilder sb = new StringBuilder();
 			
@@ -165,6 +165,7 @@ namespace BuildingMonitor.Data
 			sb.Append(",convert(nvarchar(5),a.IdGrupo) + ' - ' + lg.Nombre Grupo ");
 			sb.Append(",convert(nvarchar(5),a.IdItem) + ' - ' + li.Nombre Item ");
 			sb.Append(",convert(nvarchar(5),a.IdSubItem) + ' - ' + si.Nombre SubItem ");
+			sb.Append(",convert(nvarchar(10),a.Fecha,103) Fecha ");
 			sb.Append(",a.AvanceActual - a.AvanceInicial Avance ");
 			sb.Append(",convert(nvarchar(10),convert(decimal(15,2),si.Cantidad*(a.AvanceActual - a.AvanceInicial)/100)) + li.Unidad Cantidad ");
 			sb.Append(",(a.AvanceActual - a.AvanceInicial)*cd.Precio/100 SubTotal ");
@@ -172,13 +173,14 @@ namespace BuildingMonitor.Data
 			sb.Append("FROM uAvance a, uContrato c, uContratista co, uProyecto pr,uBloque b, uObra o, uGrupo g, uListaGrupo lg, uItem i, uListaItem li, uSubItem si, uContratoDetalle cd  ");
 			sb.Append("WHERE a.IdContrato = c.Id and c.IdContratista = co.Id and pr.Id = a.IdProyecto and b.Id = a.IdBloque and o.Id = a.IdObra and g.Id = a.IdGrupo and lg.Id = g.IdListaGrupo and i.Id = a.IdItem and i.IdListaItem = li.Id and si.Id = a.IdSubItem and cd.IdProyecto = a.IdProyecto and cd.IdBloque = a.IdBloque and cd.IdObra = a.IdObra and cd.IdGrupo = a.IdGrupo and cd.IdItem = a.IdItem and cd.IdSubItem = a.IdSubItem and cd.IdContrato = c.Id and c.IdContratista = co.Id ");
 			sb.AppendFormat("and pr.Id ={0} ", IdProyecto);
+			if (bFiltrarFecha) sb.AppendFormat("and a.Fecha between '{0}' and '{1}' ", dtFInicio.ToString("yyyyMMdd"), dtFechaFin.ToString("yyyyMMdd"));
 			if (IdBloque > 0) sb.AppendFormat("and b.Id ={0} ", IdBloque);
 			if (IdObra > 0) sb.AppendFormat("and o.Id ={0} ", IdObra);
 			if (IdGrupo > 0) sb.AppendFormat("and g.IdListaGrupo ={0} ", IdGrupo);
 			if (IdContratista > 0) sb.AppendFormat("and co.Id ={0} ", IdContratista);
 			if (IdContrato > 0) sb.AppendFormat("and c.Id ={0} ", IdContrato);
-			
-			sb.Append("ORDER by convert(nvarchar(5),a.IdProyecto) + ' - ' + pr.Nombre,");
+
+			sb.Append("ORDER by a.fecha,convert(nvarchar(5),a.IdProyecto) + ' - ' + pr.Nombre,");
 			sb.Append("convert(nvarchar(5),a.IdBloque) + ' - ' + b.Nombre,");
 			sb.Append("convert(nvarchar(5),a.IdObra) + ' - ' + o.Nombre,");
 			sb.Append("convert(nvarchar(5),a.IdGrupo) + ' - ' + lg.Nombre,");
