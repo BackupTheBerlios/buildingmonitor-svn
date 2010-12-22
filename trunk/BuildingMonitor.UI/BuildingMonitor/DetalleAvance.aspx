@@ -6,6 +6,7 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="mainContent" ID="MPContent" runat="server">
 <mp:CornerRounderTop id="ctop1" runat="server" EnableViewState="false"  />
+<script type="text/javascript" src="../ClientScript/jquery/i18n/ui.datepicker-<% Response.Write(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName); %>.js"></script>
 <asp:Panel id="pnl1" runat="server" CssClass="panelwrapper ">
 <div class="modulecontent">
 	<div>
@@ -36,6 +37,21 @@
 		<td style="width:10%">Contrato:
 			<br /><asp:DropDownList ID="m_cmbContrato" runat="server" AutoPostBack="False" DataValueField="Id" DataTextField="Glosa" />
 		</td>
+		
+	</tr>
+	<tr class="bm-group-hd"> 
+	<td align="left" style="width:40%" >
+               <div class="settingrow">
+                    <mp:SiteLabel ID="lblDateStart" runat="server" CssClass="settinglabel" ConfigKey="ContractFieldDateStart" ResourceFile="BuildingMonitorResources" />
+					<asp:TextBox ID="txtDateStart" runat="server" />   
+					Fecha Fin
+					<asp:TextBox ID="txtDateEnd" runat="server" />   
+					<asp:CheckBox ID="m_chkFecha" runat="server" Text="Filtrar Fecha" 
+						TextAlign="Left" />
+					</div>        
+               </td> 
+		<td>
+		 </td>
 	</tr>
 	</table>
 	<asp:Button ID="Button1" runat="server" Text="Aceptar" onclick="Button1_Click" />
@@ -43,7 +59,7 @@
     <table class="bm-table" id="tbl">
 		<thead>
 		<tr>
-			<th>Contratista</th><th>Obra</th><th>Grupo</th><th>Item</th><th>SubItem</th><th>&nbsp;Avance&nbsp;</th><th align="right">Cantidad</th><th>SubTotal</th>
+			<th>Contratista</th><th>Fecha</th><th>Obra</th><th>Grupo</th><th>Item</th><th>SubItem</th><th>&nbsp;Avance&nbsp;</th><th align="right">Cantidad</th><th>SubTotal</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -51,10 +67,11 @@
 			<ItemTemplate>
 			<tr>
 				<td><%# Eval("Contratista") %></td>
+				<td><%# Eval("Fecha") %></td>
 				<td><%# Eval("Obra") %></td>
 				<td><%# Eval("Grupo") %></td>
-				<td><%# Eval("Item") %></td>
-				<td><%# Eval("SubItem") %></td>
+				<td><%# Eval("Item") %></td>				
+				<td><%# Eval("SubItem") %></td>				
 				<td class="bm-number"><%# BuildingMonitor.UI.Helpers.Formatter.Decimal(Eval("Avance"))%> %</td>
 				<td align="right"><%# Eval("Cantidad")%></td>
 				<td class="bm-number"><%# BuildingMonitor.UI.Helpers.Formatter.Decimal(Eval("SubTotal"))%></td>
@@ -85,7 +102,12 @@
 	</table>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
-			jQuery('#tbl tbody tr:odd').addClass('alternate');
+		jQuery('#tbl tbody tr:odd').addClass('alternate');
+
+		jQuery.datepicker.setDefaults(jQuery.datepicker.regional['<% Response.Write(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName); %>']);
+		jQuery.datepicker.setDefaults({ duration: 'fast', changeMonth: true, changeYear: true });
+		jQuery('#<% Response.Write(txtDateStart.ClientID); %>').datepicker();
+		jQuery('#<% Response.Write(txtDateEnd.ClientID); %>').datepicker();
 		})
 	</script>
 	</div>

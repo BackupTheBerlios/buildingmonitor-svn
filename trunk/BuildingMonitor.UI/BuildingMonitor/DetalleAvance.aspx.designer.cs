@@ -86,6 +86,42 @@ namespace BuildingMonitor.UI {
         protected global::System.Web.UI.WebControls.DropDownList m_cmbContrato;
         
         /// <summary>
+        /// lblDateStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::mojoPortal.Web.Controls.SiteLabel lblDateStart;
+        
+        /// <summary>
+        /// txtDateStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDateStart;
+        
+        /// <summary>
+        /// txtDateEnd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDateEnd;
+        
+        /// <summary>
+        /// m_chkFecha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox m_chkFecha;
+        
+        /// <summary>
         /// Button1 control.
         /// </summary>
         /// <remarks>
